@@ -55,8 +55,8 @@ a, a:hover, a:focus {
 }
 
 /* Semester Button */
-.sem-btn{
-    font-family: 'Roboto';
+.semester-btn{
+    font-family: 'Roboto' ;
     padding: 10px;
     display: block;
     background-color: #7386d5;
@@ -66,7 +66,7 @@ a, a:hover, a:focus {
     border: 0px solid;
     border-radius: 4px;
 }
-.sem-btn:hover{
+.semester-btn:hover{
     color: white;
     background-color: #8f58ea;
 }

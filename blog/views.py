@@ -33,3 +33,7 @@ def results(request):
 
 def uploadFiles(request):
     return render(request, 'blog/uploadFiles.html')
+
+
+def files(request):
+    return render(request , 'blog/files.html')
