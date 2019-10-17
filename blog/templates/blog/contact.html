@@ -1,0 +1,59 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+    <!-- Main Content -->
+            <div class="container bg-light">
+                <!-- Left Side -->
+                <div class="row">
+                    <div class="col-md-4 mb-4 mt-2">
+                        <div class="bg-white">
+                                <div class="container">
+                                        <h3>Address</h3><br>
+                                        Visit us at:<br>
+                                        Example.com<br>
+                                        Box 564, Disneyland<br>
+                                        USA
+                                        </div>
+                                <div class="container">
+                                        <h3>Business Hours</h3><br>
+                                        Monday-Friday<br>
+                                        Saturday 7-am<br>
+                                        Sunday-Closed<br>
+                                        </div>
+                                <div class="container">
+                                        <h3>Telephone</h3><br>
+                                        +8888888<br>
+                                        +78787878<br>
+                                        </div>
+                            
+                        </div>
+                    </div>
+                <!-- Right Side -->
+                <div class="col-md-7">
+                    <h3>Drop Us a line so we can hear you.</h3>
+                    <form action="" class="mb-4">
+                        <div class="form-group">
+                          <label for="contactEmail">Email</label>
+                          <input type="email" name="contactEmail" id="contactEmail" class="form-control" placeholder="Email" aria-describedby="contactEmail">
+                        </div>
+                        <div class="form-group">
+                          <label for="name">Name</label>
+                          <input type="name" name="name" id="name" class="form-control" placeholder="Name" aria-describedby="name">
+                        </div>
+                        <div class="form-group">
+                          <label for="phoneNumber">Phone</label>
+                          <input type="number" name="phoneNumber" id="phoneNumber" class="form-control" placeholder="Phone Number" aria-describedby="phoneNumber">
+                        </div>
+                        
+                          
+                          <div class="form-group">
+                                <label for="">Message</label>
+                            <textarea class="form-control" name="messageArea" id="messageArea" rows="5"></textarea>
+                          </div>
+                        
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                </div>
+            </div>
+{% endblock content %}

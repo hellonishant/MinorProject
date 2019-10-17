@@ -1,0 +1,88 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block content %}
+   <div id="slider-wrapper container">
+      <div class="row">
+        <div class="col-md-12">
+          <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Carousel indicators -->
+            <ol class="carousel-indicators">
+              <li
+                data-target="#myCarousel"
+                data-slide-to="0"
+                class="active"
+              ></li>
+              <li data-target="#myCarousel" data-slide-to="1"></li>
+              <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <!-- Wrapper for carousel items -->
+            <div class="carousel-inner">
+              <div class="carousel-item text-center active">
+                <img src="{% static 'blog/images/slide1.png' %}" alt="First Slide" />
+              </div>
+              <div class="carousel-item text-center">
+                <img src="{% static 'blog/images/slide2.png' %}" alt="Second Slide" />
+              </div>
+              <div class="carousel-item text-center">
+                <img src="{% static 'blog/images/slide3.png' %}" alt="Third Slide" />
+              </div>
+            </div>
+            <!-- Carousel controls -->
+            <a
+              class="carousel-control-prev"
+              href="#myCarousel"
+              data-slide="prev"
+            >
+              <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a
+              class="carousel-control-next"
+              href="#myCarousel"
+              data-slide="next"
+            >
+              <span class="carousel-control-next-icon"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Image Grid -->
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col-md-4">
+          <img src="{% static 'blog/images/slide1.png' %}" alt="Image" />
+          <p>This is the first Image</p>
+        </div>
+        <div class="col-md-4">
+          <img src="{% static 'blog/images/slide1.png' %}" alt="Image" />
+          <p>This is the first Image</p>
+        </div>
+        <div class="col-md-4">
+          <img src="{% static 'blog/images/slide1.png' %}" alt="Image" />
+          <p>This is the first Image</p>
+        </div>
+      </div>
+    </div>
+    <!-- Description Section -->
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col-md-4 mt-auto mb-auto">
+          <img src="{% static 'blog/images/slide1.png' %}" alt="Image" />
+        </div>
+        <div class="col-md-6 offset-md-2">
+          <h1 class="display-4">About our Students</h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci
+            quaerat odit harum dignissimos ad, officiis nam rerum deserunt
+            quibusdam ex illo sit id, excepturi voluptas debitis aperiam ut
+            laborum voluptates quod quidem? Accusantium quae cum a, mollitia
+            deserunt tenetur odio magnam optio dolorem vitae aut sit dolores
+            nemo molestiae at. Aperiam nam natus consectetur id voluptate
+            repellat repudiandae animi fugiat, mollitia ratione provident, vitae
+            dignissimos deleniti dolor voluptatem, qui quibusdam. Consequuntur
+            rerum vero et perferendis, ratione eveniet ex totam temporibus?
+          </p>
+        </div>
+      </div>
+    </div>
+{% endblock content %}
