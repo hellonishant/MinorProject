@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 
+
 # Create your views here.
 
 
@@ -31,9 +32,10 @@ def dashboard(request):
 def results(request):
     return render(request, 'blog/results.html')
 
-def uploadFiles(request):
+
+def upload_files(request):
     return render(request, 'blog/uploadFiles.html')
 
 
 def files(request):
-    return render(request , 'blog/files.html')
+    return render(request, 'blog/files.html')
