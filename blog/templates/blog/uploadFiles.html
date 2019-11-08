@@ -3,78 +3,68 @@
 {% block content %}
     <!-- Main Content -->
     <div class="wrapper">
-
-
-      <!-- Content Section -->
-      <div id="content">
-        <!-- Content -->
-        <div class="container mt-3">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="file-upload-wrapper">
-                <form action="" class="bg-light p-3 rounded">
-                  <div class="form-group ">
-                    <h1>Upload Files</h1>
-                  </div>
-                  <div class="row">
-                  <div class="form-group col-md-6">
-                    <label for="semesterSelector"><h2>Select Semester</h2></label>
-              <select
-                class="form-control"
-                name="semesterSelector"
-                id="semesterSelector"
-              >
-                <option value="">I semester</option>
-                <option value="">II semester</option>
-                <option value="">III semester</option>
-                <option value="">IV semester</option>
-                <option value="">V semester</option>
-                <option value="">VI semester</option>
-                <option value="">VII semester</option>
-                <option value="">VIII semester</option>
-              </select>
-                  </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="fileUpload">UploadFile</label>
-                    <input
-                      type="file"
-                      class="form-control-file"
-                      name="fileUpload"
-                      id="fileUpload"
-                      placeholder="Upload Data File"
-                      aria-describedby="fileUploader"
-                    />
-                    <small id="fileUploader" class="form-text text-muted"
-                      >Select a csv file.</small
-                    >
-                  </div>
-                  <div class="form-group">
-                    <label for="fileDescription">Description</label>
-                    <textarea
-                      type="text"
-                      class="form-control"
-                      name="fileDescription"
-                      id="fileDescription"
-                      aria-describedby="fileInfo"
-                      placeholder="Description"
-                      rows="5"
-                      aria-hidden="true"
-                    ></textarea>
-                    <small id="fileInfo" class="form-text text-muted"
-                      >Description</small
-                    >
-                  </div>
-                  <div class="form-group">
-                    <button type="submit" class="form-control btn btn-primary">
-                      Submit
-                    </button>
-                  </div>
-                </form>
-              </div>
+        <!-- Content Section -->
+        <div id="content">
+            <!-- Content -->
+            <div class="container mt-3">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="file-upload-wrapper">
+                            <form action="" method="post" enctype="multipart/form-data" class="bg-light p-3 rounded">
+                                {% csrf_token %}
+                                <div class="form-group ">
+                                    <h1>Upload Files</h1>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for="semesterSelector"><h2>Select Semester</h2></label>
+                                        <select class="form-control" name="semesterSelector" id="semesterSelector">
+                                            <option value="I semester">I semester</option>
+                                            <option value="II semester">II semester</option>
+                                            <option value="III semester">III semester</option>
+                                            <option value="IV semester">IV semester</option>
+                                            <option value="V semester">V semester</option>
+                                            <option value="VI semester">VI semester</option>
+                                            <option value="VII semester">VII semester</option>
+                                            <option value="VIII semester">VIII semester</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for="branchSelector"><h2>Select Branch</h2></label>
+                                        <select class="form-control" name="branchSelector" id="branchSelector">
+                                            <option value="Aerospace Engineering">Aerospace Engineering</option>
+                                            <option value="Computer Engineering">Computer Engineering</option>
+                                            <option value="Electronic Engineering">Electronic Engineering</option>
+                                            <option value="Electrical Engineering">Electrical Engineering</option>
+                                            <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fileUpload">UploadFile</label>
+                                    <input type="file" class="form-control-file" name="fileUpload" id="fileUpload"
+                                           placeholder="Upload Data File" aria-describedby="fileUploader"/>
+                                    <small id="fileUploader" class="form-text text-muted">Select a csv file.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fileDescription">Description</label>
+                                    <textarea type="text" class="form-control" name="fileDescription"
+                                              id="fileDescription" aria-describedby="fileInfo" placeholder="Description"
+                                              rows="5" aria-hidden="true"></textarea>
+                                    <small id="fileInfo" class="form-text text-muted">Description</small>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="form-control btn btn-primary">
+                                        Submit
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
 {% endblock content %}
