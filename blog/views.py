@@ -1,3 +1,4 @@
+import pandas as pd
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
@@ -6,8 +7,8 @@ from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.urls import reverse
 from django.utils.text import slugify
+
 from .models import File as FileModel, Result
-import pandas as pd
 
 
 def login_view(request):
@@ -66,7 +67,7 @@ def upload_files(request):
         data = pd.read_csv('media/' + slugify(branch) + '_' + slugify(sem) + '_' + file.name)
         data = data.fillna(0)
 
-        result = [
+        r = [
             Result(
                 student_id=data.loc[idx, 'Student_ID'],
                 semester_name=sem,
@@ -85,10 +86,32 @@ def upload_files(request):
             )
             for idx in data.index
         ]
-
-        Result.objects.bulk_create(result)
-
+        Result.objects.bulk_create(r)
         return HttpResponseRedirect(reverse('files'))
+
+
+@login_required
+def result_search(request):
+    if request.method == "GET":
+        return render(request, 'blog/searchRollNo.html')
+    else:
+        return HttpResponseRedirect(reverse('student-result', args=(request.POST['rollNo'],)))
+
+
+@login_required
+def result(request, roll_no):
+    context = {'results': Result.objects.all().filter(student_id=roll_no)}
+    return render(request, 'blog/rollNoResults.html', context)
+
+
+@login_required
+def results(request, dep, sem, section):
+    if section == 'All':
+        context = {'results': Result.objects.all().filter(department_name=dep, semester_name=sem)}
+    else:
+        context = {'results': Result.objects.all().filter(department_name=dep, semester_name=sem, section=section)}
+
+    return render(request, 'blog/results.html', context)
 
 
 def home(request):
@@ -106,11 +129,6 @@ def contact(request):
 @login_required
 def dashboard(request):
     return render(request, 'blog/userDashboard.html')
-
-
-@login_required
-def results(request):
-    return render(request, 'blog/results.html')
 
 
 @login_required
