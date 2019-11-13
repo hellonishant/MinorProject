@@ -1,10 +1,13 @@
+import os
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.core.files.storage import FileSystemStorage
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
+from django.utils.encoding import smart_str
 from django.utils.text import slugify
 from .models import File as FileModel, Result
 import pandas as pd
@@ -91,6 +94,28 @@ def upload_files(request):
         return HttpResponseRedirect(reverse('files'))
 
 
+@login_required
+def files(request):
+    context = {'files': FileModel.objects.all()}
+    return render(request, 'blog/files.html', context)
+
+
+@login_required
+def download(request, pk):
+    f = FileModel.objects.all().get(id=pk)
+    response = HttpResponse(content_type='application/force-download')
+    response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(f.file_name)
+    response['X-Sendfile'] = smart_str(f.url)
+    return response
+
+
+@login_required
+def delete(request, pk):
+    f = FileModel.objects.all().get(id=pk)
+    f.delete()
+    return HttpResponseRedirect(reverse('files'))
+
+
 def home(request):
     return render(request, 'blog/home.html')
 
@@ -111,8 +136,3 @@ def dashboard(request):
 @login_required
 def results(request):
     return render(request, 'blog/results.html')
-
-
-@login_required
-def files(request):
-    return render(request, 'blog/files.html')

@@ -10,5 +10,7 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='blog-dashboard'),
     path('results/', views.results, name='department-results'),
     path('upload/', views.upload_files, name='uploadFiles'),
-    path('files/', views.files, name='files')
+    path('files/', views.files, name='files'),
+    path('download/<int:pk>/', views.download, name='download'),
+    path('delete/<int:pk>/', views.delete, name='delete'),
 ]
