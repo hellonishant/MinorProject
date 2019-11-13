@@ -1,4 +1,6 @@
 import pandas as pd
+import plotly
+import plotly.graph_objs as go
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
@@ -124,23 +126,33 @@ def result_search(request):
 @login_required
 def result(request, roll_no):
     r = Result.objects.all().filter(student_id=roll_no)
-
     avg = 0
     i = 0
+    predict = 0
+    marks = []
 
     for r1 in r:
         i = i + 1
         avg = avg + r1.percentage
-
-    predict = 0
+        marks.insert(len(marks), r1.percentage)
 
     if i != 0:
         predict = avg/i
+
+    # points.insert(len(points), predict)
+
+    data = {
+        "data": [go.Bar(y=marks)],
+        "layout": go.Layout(title="Result")
+    }
+
+    graph_div = plotly.offline.plot(data, auto_open=False, output_type="div")
 
     context = {
         'results': r,
         'p1': predict-2,
         'p2': predict+2,
+        'graph': graph_div,
     }
     return render(request, 'blog/rollNoResults.html', context)
 
