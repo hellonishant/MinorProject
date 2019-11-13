@@ -1,0 +1,27 @@
+{% extends 'blog/baseUser.html' %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 bg-light">
+                <form method="post" action="" class="form-inline mt-4 mb-4 rounded p-4">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="rollNo" class="">Enter Roll Number</label>
+                        <input
+                                type="text"
+                                name="rollNo"
+                                id="rollNo"
+                                class="form-control m-4"
+                                placeholder="Roll No."
+                                aria-describedby="roll-number"
+                        />
+                        <button type="submit" class="btn btn-primary pl-4 pr-4">
+                            Search
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
