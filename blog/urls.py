@@ -12,5 +12,7 @@ urlpatterns = [
     path('result/', views.result_search, name='student-result-search'),
     path('result/<str:roll_no>/', views.result, name='student-result'),
     path('upload/', views.upload_files, name='uploadFiles'),
-    path('files/', views.files, name='files')
+    path('files/', views.files, name='files'),
+    path('download/<int:pk>/', views.download, name='download'),
+    path('delete/<int:pk>/', views.delete, name='delete'),
 ]
