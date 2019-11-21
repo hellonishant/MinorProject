@@ -1,8 +1,8 @@
 {
     "python.pythonPath": "/home/nst/.virtualenvs/django/bin/python",
     "files.autoSave": "onFocusChange",
-    "python.linting.pep8Enabled": true,
-    "python.linting.pep8CategorySeverity.E": "Warning",
+    "python.linting.pycodestyleEnabled": true,
+    "python.linting.pycodestyleCategorySeverity.E": "Warning",
     "python.linting.pylintCategorySeverity.error": "Warning",
     "editor.fontFamily": "'SF Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.fontLigatures": true,
