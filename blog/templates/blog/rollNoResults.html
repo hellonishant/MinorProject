@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12">
             {% if predict %}
-                <center><h3>Predicted result {{ p1 }} - {{ p2 }}</h3></center>
+                <center><h3>Predicted result of Sem {{ count }}: {{ p1 }} - {{ p2 }}</h3></center>
             {% endif %}
                 <div style="width: auto; height: auto">
                     <img src="data:image/png;base64,{{graph|safe}}">
@@ -27,7 +27,7 @@
                             <th scope="col">Percentage</th>
                             <th scope="col">Total</th>
                             <th scope="col">Department Name</th>
-{#                            <th scope="col">Section</th>#}
+                            <th scope="col">Section</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -44,7 +44,7 @@
                                 <td scope="row" class="">{{ result.percentage }}</td>
                                 <td scope="row" class="">{{ result.total_marks }}</td>
                                 <td scope="row" class="">{{ result.department_name }}</td>
-{#                                <td scope="row" class="">{{ result.section }}</td>#}
+                                <td scope="row" class="">{{ result.section }}</td>
                             </tr>
                         {% endfor %}
                         </tbody>

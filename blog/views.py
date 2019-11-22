@@ -88,7 +88,7 @@ def upload_files(request):
                 total_marks=data.loc[idx, 'sum'],
                 # department_id=data.loc[idx, 'Department_ID'],
                 department_name=branch,
-                # section=data.loc[idx, 'Section']
+                section=data.loc[idx, 'section']
             )
             for idx in data.index
         ]
@@ -143,7 +143,7 @@ def result(request, roll_no):
         marks.insert(len(marks), r1.percentage)
 
     if i != 0:
-        predict = avg/i
+        predict = round(avg/i, 2)
 
     fig = plt.figure(figsize=(9, 3))
     plt.subplot(131)
@@ -172,6 +172,7 @@ def result(request, roll_no):
         context = {
             'results': r,
             'predict': True,
+            'count': len(s),
             'p1': predict - 2,
             'p2': predict + 2,
             'graph': str(graphic)[2:-1],
