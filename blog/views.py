@@ -1,6 +1,9 @@
+import base64
+import io
+
+import PIL.Image as Image
+import matplotlib.pyplot as plt
 import pandas as pd
-import plotly
-import plotly.graph_objs as go
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
@@ -83,9 +86,9 @@ def upload_files(request):
                 paper_7=data.loc[idx, 'Paper 7'],
                 percentage=data.loc[idx, 'percentage'],
                 total_marks=data.loc[idx, 'sum'],
-                department_id=data.loc[idx, 'Department_ID'],
+                # department_id=data.loc[idx, 'Department_ID'],
                 department_name=branch,
-                section=data.loc[idx, 'Section']
+                # section=data.loc[idx, 'Section']
             )
             for idx in data.index
         ]
@@ -126,34 +129,54 @@ def result_search(request):
 @login_required
 def result(request, roll_no):
     r = Result.objects.all().filter(student_id=roll_no)
+
     avg = 0
     i = 0
     predict = 0
     marks = []
+    s = []
 
     for r1 in r:
         i = i + 1
         avg = avg + r1.percentage
+        s.insert(len(s), "Sem " + r1.semester_name)
         marks.insert(len(marks), r1.percentage)
 
     if i != 0:
         predict = avg/i
 
-    # points.insert(len(points), predict)
+    fig = plt.figure(figsize=(9, 3))
+    plt.subplot(131)
+    plt.bar(s, marks)
+    plt.subplot(132)
+    plt.scatter(s, marks)
+    plt.subplot(133)
+    plt.plot(s, marks)
+    plt.suptitle('Result')
+    canvas = fig.canvas
+    buf, size = canvas.print_to_buffer()
+    image = Image.frombuffer('RGBA', size, buf, 'raw', 'RGBA', 0, 1)
+    buffer = io.BytesIO()
+    image.save(buffer, 'PNG')
+    graphic = buffer.getvalue()
+    graphic = base64.b64encode(graphic)
+    buffer.close()
 
-    data = {
-        "data": [go.Bar(y=marks)],
-        "layout": go.Layout(title="Result")
-    }
+    if len(r) > 7:
+        context = {
+            'results': r,
+            'predict': False,
+            'graph': str(graphic)[2:-1],
+        }
+    else:
+        context = {
+            'results': r,
+            'predict': True,
+            'p1': predict - 2,
+            'p2': predict + 2,
+            'graph': str(graphic)[2:-1],
+        }
 
-    graph_div = plotly.offline.plot(data, auto_open=False, output_type="div")
-
-    context = {
-        'results': r,
-        'p1': predict-2,
-        'p2': predict+2,
-        'graph': graph_div,
-    }
     return render(request, 'blog/rollNoResults.html', context)
 
 
