@@ -139,7 +139,7 @@ def result(request, roll_no):
     for r1 in r:
         i = i + 1
         avg = avg + r1.percentage
-        s.insert(len(s), "Sem " + r1.semester_name)
+        s.insert(len(s), "S " + r1.semester_name)
         marks.insert(len(marks), r1.percentage)
 
     if i != 0:
@@ -172,7 +172,7 @@ def result(request, roll_no):
         context = {
             'results': r,
             'predict': True,
-            'count': len(s),
+            'count': len(s)+1,
             'p1': predict - 2,
             'p2': predict + 2,
             'graph': str(graphic)[2:-1],
