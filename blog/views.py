@@ -1,5 +1,6 @@
 import base64
 import io
+import os
 
 import PIL.Image as Image
 import matplotlib.pyplot as plt
@@ -11,9 +12,9 @@ from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
-from django.utils.encoding import smart_str
 from django.utils.text import slugify
 
+from Blog import settings
 from .models import File as FileModel, Result
 
 
@@ -105,16 +106,21 @@ def files(request):
 @login_required
 def download(request, pk):
     f = FileModel.objects.all().get(id=pk)
-    response = HttpResponse(content_type='application/force-download')
-    response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(f.file_name)
-    response['X-Sendfile'] = smart_str(f.url)
+    file_path = settings.BASE_DIR + f.url
+    fh = open(file_path, 'rb')
+    response = HttpResponse(fh.read(), content_type="application/csv")
+    response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
     return response
 
 
 @login_required
 def delete(request, pk):
     f = FileModel.objects.all().get(id=pk)
+    file_path = settings.BASE_DIR + f.url
+    r = Result.objects.all().filter(semester_name=f.sem, department_name=f.branch)
     f.delete()
+    r.delete()
+    os.remove(file_path)
     return HttpResponseRedirect(reverse('files'))
 
 
