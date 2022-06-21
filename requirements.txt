@@ -3,7 +3,7 @@ matplotlib
 Django==2.2.8
 django-ajax-selects==1.7.1
 django-crispy-forms==1.8.0
-numpy==1.17.4
+numpy==1.22.0
 pandas==0.25.3
 python-dateutil==2.8.1
 pytz==2019.3
